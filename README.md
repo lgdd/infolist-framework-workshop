@@ -433,6 +433,8 @@ Pour réaliser ces InfoListProviders, nous nous appuyons sur le fait que nous av
 
 Afin de mutualiser le code commun à ces trois providers, nous avons constitué une classe abstrait `com.github.lgdd.liferay.workshop.concert.collection.providers.BaseConcertsInfoListProvider` à étendre pour implémenter les trois `InfoListProvider`.
 
+L'objectif du workshop sera de **finaliser le code de cette classe abstraite**.
+
 Voici pour exemple le code de celui qui fournit la liste des concerts passés (cela consiste à fixer les critères de date et à nommer la collection telle qu'elle apparaîtra dans les champs de sélection du back-office Liferay):
 
 ```java=
@@ -577,6 +579,23 @@ public class PastConcertsInfoListProvider
 Bien que les `@Reference` vers les services OSGi sont déjà utiles au niveau de la classe abstraite, il est important de noter que l'annotation `@Reference` n'a de sens que dans un `@Component`. Et comme une classe abstraite n'est pas un `@Component`, ce n'est que dans les classes concrètes qu'on peut binder la `@Reference`.
 
 ---
+
+Il reste à implémenter la méthode de `com.github.lgdd.liferay.workshop.concert.collection.providers.BaseConcertsInfoListProvider` qui interroge les
+API de recherche afin de retourner les enregistrements de la **structure** concert de l'**asset library** events dont les IDs sont fournis
+par une configuration dans les System settings.
+
+Vous pouvez suivre l'implémentation en cours de workshop ou observer le diff : https://github.com/lgdd/infolist-framework-workshop/pull/1/commits/c12b264b5f8d5b2919d16dc150fd7c5b948b6562
+
+### Configuration des InfoListProviders
+
+Notre module a besoin de connaître les IDs de la Web Content Structure
+des concerts et de l'asset library des évènements.
+
+Une fois que vous avez identifié ces IDs dans le back-office Liferay,
+vous pourrez les renseigner ici :
+
+![](https://i.imgur.com/Fild8KA.png)
+
 
 ### Intégration des InfoListProviders
 
